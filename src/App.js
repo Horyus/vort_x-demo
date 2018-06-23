@@ -23,8 +23,9 @@ class App extends Component {
             <VortexGate contracts={{
                 type: 'truffle',
                 truffle_contracts: [SimpleStorage],
-                preloaded_contracts: ["SimpleStorage"]
-            }} network_contracts={[SimpleStorage]} loader={VortexMetamaskLoader(Web3)}>
+                preloaded_contracts: ["SimpleStorage"],
+                network_contracts: [SimpleStorage]
+            }} loader={VortexMetamaskLoader(Web3)}>
 
 
                 <VortexWeb3Loaded>
