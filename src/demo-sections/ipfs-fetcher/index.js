@@ -1,9 +1,9 @@
 import React from 'react';
 import {Panel} from "react-bootstrap";
 import {FormGroup, ControlLabel, FormControl, HelpBlock, Button} from 'react-bootstrap';
-import IsIpfs from 'is-ipfs';
 import {connect} from "vort_x-components";
 import {IPFSLoad} from "vort_x";
+import * as IsIpfs from 'is-ipfs';
 
 function FieldGroup({ id, label, help, ...props }) {
     return (
@@ -17,19 +17,22 @@ function FieldGroup({ id, label, help, ...props }) {
 
 export class _FetchHash extends React.Component {
     render() {
-        if (IsIpfs.multihash(this.props.ipfs_hash)) {
-            if (!this.props.content) {
-                this.props.IPFSLoad(this.props.ipfs_hash);
+        if (!this.props.ipfs_hash || this.props.ipfs_hash.length === 0)
+            return (<div></div>);
+        if (!this.props.content) {
+            this.props.IPFSLoad(this.props.ipfs_hash);
+            if (IsIpfs.multihash(this.props.ipfs_hash))
                 return (<code>FETCHING ...</code>)
-            } else {
-                if (this.props.content.content) {
-                    return (<code>{this.props.content.content.toString()}</code>)
-                } else if (this.props.content.error) {
-                    return (<div>
-                        <h1>Something went wrong :( Try text data and it will work (it gets random when trying to fetch directories)</h1>
-                        <code>{this.props.content.error.message}</code>
-                    </div>)
-                }
+            else
+                return (<code> NOPE </code>)
+        } else {
+            if (this.props.content.content) {
+                return (<code>{this.props.content.content.toString()}</code>)
+            } else if (this.props.content.error) {
+                return (<div>
+                    <h1>Something went wrong :( Try text data and it will work (it gets random when trying to fetch directories)</h1>
+                    <code>{this.props.content.error.message}</code>
+                </div>)
             }
         }
         return (<div></div>)
@@ -39,7 +42,7 @@ export class _FetchHash extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         ...ownProps,
-        content: IsIpfs.multihash(ownProps.ipfs_hash) ? state.ipfs[ownProps.ipfs_hash] : undefined
+        content: state.ipfs[ownProps.ipfs_hash]
     }
 };
 
@@ -69,7 +72,7 @@ export class IPFSFetcher extends React.Component {
 
     render() {
         return (<Panel>
-            <Panel.Heading>Example #7: Fetch Data from IPFS and store it in cache</Panel.Heading>
+            <Panel.Heading>Example #7: Fetch Data from IPFS and store it in cache (only works on files for the moment, and with exact hashes)</Panel.Heading>
             <Panel.Body>
                 <form onSubmit={this.update}>
                     <FieldGroup
