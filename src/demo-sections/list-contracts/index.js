@@ -46,12 +46,12 @@ class ContractCallReturnContainer extends React.Component {
 class ContractsContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.props.contract.instance.vortex.get.vortexData({from: this.props.web3.coinbase});
+        this.props.contract.instance.vortexMethods.get.data({from: this.props.web3.coinbase});
         const mapStateToProps = (state) => {
             return {
-                result: state.contracts[this.props.contract_name][this.props.contract_address].instance.vortex.get.vortexData({from: this.props.web3.coinbase}),
+                result: state.contracts[this.props.contract_name][this.props.contract_address].instance.vortexMethods.get.data({from: this.props.web3.coinbase}),
                 update: (newValue) => {
-                    this.props.contract.instance.vortex.set.vortexSend({from: this.props.web3.coinbase, gas: 100000}, newValue);
+                    this.props.contract.instance.vortexMethods.set.send(newValue, {from: this.props.web3.coinbase, gas: 100000});
                 }
             }
         };
@@ -65,9 +65,9 @@ class ContractsContainer extends React.Component {
                 <Panel.Body>
                     <VortexMethodCallList container={CallContainer} element={SingleCall} methodName="times" contractName={this.props.contract_name} contractAddress={this.props.contract_address} arguments={
                         [
-                            [{from: this.props.web3.coinbase}, 2],
-                            [{from: this.props.web3.coinbase}, 3],
-                            [{from: this.props.web3.coinbase}, 4]
+                            [2, {from: this.props.web3.coinbase}],
+                            [3, {from: this.props.web3.coinbase}],
+                            [4, {from: this.props.web3.coinbase}]
                         ]
                     }/>
                     <this.resultContainer/>
