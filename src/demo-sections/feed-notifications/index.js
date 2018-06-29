@@ -1,19 +1,21 @@
 import * as React from "react";
 import NotificationSystem from "react-notification-system";
 import {connect} from 'vort_x-components';
+import {EventFilter} from 'vort_x';
 
 class _FeedNotifications extends React.Component {
 
     constructor(props) {
         super(props);
         this.initialRender = false;
-        this.notified = 0;
+        this.feed_notified = 0;
+        this.event_notified = 0;
         this._notificationSystem = null;
     }
 
     shouldComponentUpdate(nextProps) {
-        if (this.notified < nextProps.feed.length && this._notificationSystem) {
-            for (let start_idx = this.notified; start_idx < nextProps.feed.length; ++start_idx) {
+        if (this.feed_notified < nextProps.feed.length && this._notificationSystem) {
+            for (let start_idx = this.feed_notified; start_idx < nextProps.feed.length; ++start_idx) {
                 switch (nextProps.feed[start_idx].action) {
                     case 'NEW_ERROR':
                         this._notificationSystem.addNotification({position: 'br', title: 'Error at ' + nextProps.feed[start_idx].error.when, message: nextProps.feed[start_idx].error.message, level: 'error'});
@@ -24,14 +26,17 @@ class _FeedNotifications extends React.Component {
                     case 'NEW_TRANSACTION':
                         this._notificationSystem.addNotification({position: 'br', title: 'New Transaction Broadcasted', message: nextProps.feed[start_idx].transaction_hash, level: 'success'});
                         break ;
-                    case 'NEW_IPFS_CONTENT':
-                        this._notificationSystem.addNotification({position: 'br', title: 'New IPFS Content Fetched', message: nextProps.feed[start_idx].ipfs_hash, level: 'info'});
-                        break ;
                     default:
                         break ;
                 }
             }
-            this.notified = nextProps.feed.length;
+            this.feed_notified = nextProps.feed.length;
+        }
+        if (this.event_notified < nextProps.event_feed.length && this._notificationSystem) {
+            for (let start_idx = this.event_notified; start_idx < nextProps.event_feed.length; ++start_idx) {
+                this._notificationSystem.addNotification({position: 'bl', title: "[" + nextProps.event_feed[start_idx].event_name + "] has been broadcasted", message: 'From ' + nextProps.event_feed[start_idx].contract_name + ":" + nextProps.event_feed[start_idx].contract_address, level: 'info'});
+            }
+            this.event_notified = nextProps.event_feed.length;
         }
         return !this.initialRender;
     }
@@ -60,9 +65,15 @@ class _FeedNotifications extends React.Component {
 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+    let selector;
+    if (!ownProps.selector)
+        selector = EventFilter({contract_name: 'SimpleStorage', event_name: 'Test'});
     return {
-        feed: state.feed
+        ...ownProps,
+        selector : ownProps.selector || selector,
+        feed: state.feed,
+        event_feed: ownProps.selector ? ownProps.selector(state) : selector(state)
     }
 };
 

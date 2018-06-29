@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Vortex} from "vort_x";
 import {VortexContractsList, connect, VortexMethodCallList} from 'vort_x-components';
 import {FormGroup, ControlLabel, FormControl, HelpBlock, Button} from 'react-bootstrap';
 import {Panel} from "react-bootstrap";
@@ -44,9 +45,11 @@ class ContractCallReturnContainer extends React.Component {
 }
 
 class ContractsContainer extends React.Component {
+
     constructor(props) {
         super(props);
         this.props.contract.instance.vortexMethods.get.data({from: this.props.web3.coinbase});
+        Vortex.get().subscribeEvent("Test", this.props.contract_name, this.props.contract_address);
         const mapStateToProps = (state) => {
             return {
                 result: state.contracts[this.props.contract_name][this.props.contract_address].instance.vortexMethods.get.data({from: this.props.web3.coinbase}),
