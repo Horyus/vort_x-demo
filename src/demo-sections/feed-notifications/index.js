@@ -1,7 +1,7 @@
 import * as React from "react";
 import NotificationSystem from "react-notification-system";
 import {connect} from 'vort_x-components';
-import {EventFilter} from 'vort_x';
+import {getEvents} from 'vort_x';
 
 class _FeedNotifications extends React.Component {
 
@@ -66,14 +66,10 @@ class _FeedNotifications extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let selector;
-    if (!ownProps.selector)
-        selector = EventFilter({contract_name: 'SimpleStorage', event_name: 'Test'});
     return {
         ...ownProps,
-        selector : ownProps.selector || selector,
         feed: state.feed,
-        event_feed: ownProps.selector ? ownProps.selector(state) : selector(state)
+        event_feed: getEvents(state, {contract_name: 'SimpleStorage', event_name: 'Test'})
     }
 };
 

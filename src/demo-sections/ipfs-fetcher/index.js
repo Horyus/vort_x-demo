@@ -2,7 +2,7 @@ import React from 'react';
 import {Panel} from "react-bootstrap";
 import {FormGroup, ControlLabel, FormControl, HelpBlock, Button} from 'react-bootstrap';
 import {connect} from "vort_x-components";
-import {IPFSLoad} from "vort_x";
+import {getIPFSHash} from "vort_x";
 import * as IsIpfs from 'is-ipfs';
 
 function FieldGroup({ id, label, help, ...props }) {
@@ -20,7 +20,6 @@ export class _FetchHash extends React.Component {
         if (!this.props.ipfs_hash || this.props.ipfs_hash.length === 0)
             return (<div></div>);
         if (!this.props.content) {
-            this.props.IPFSLoad(this.props.ipfs_hash);
             if (IsIpfs.multihash(this.props.ipfs_hash))
                 return (<code>FETCHING ...</code>)
             else
@@ -40,19 +39,17 @@ export class _FetchHash extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    if (IsIpfs.multihash(ownProps.ipfs_hash))
+        return {
+            ...ownProps,
+            content: getIPFSHash(state, ownProps.ipfs_hash)
+        }
     return {
-        ...ownProps,
-        content: state.ipfs[ownProps.ipfs_hash]
+        ...ownProps
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        IPFSLoad: (hash) => {dispatch(IPFSLoad(hash))}
-    }
-};
-
-const FetchHash = connect(_FetchHash, mapStateToProps, mapDispatchToProps);
+const FetchHash = connect(_FetchHash, mapStateToProps);
 
 export class IPFSFetcher extends React.Component {
     constructor(props) {
