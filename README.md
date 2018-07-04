@@ -11,10 +11,16 @@
 
 ### Running the Demo
 
+## Metamask
+
+Install [Metamask](https://metamask.io/) for your browser.
+
+## Running
+
 In one terminal
 ```
 npm install -g ganache-cli truffle
-ganache-cli -p 8545
+ganache-cli -p 8545 -b 5
 ```
 
 And in another one
@@ -26,6 +32,11 @@ npm start
 ```
 
 And visit localhost on port 3000 !
+
+**TIP !**
+
+You can use the same `mnemonic` (12 word seed phrase) while calling `ganache-cli`, just add them with the `--mnemonic` flag.
+This is very helpful as you can import these words in Metamask and always have a ready to use account for testing !
 
 ### Live Transaction Data
 
