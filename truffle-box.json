@@ -1,0 +1,11 @@
+{
+  "ignore": [
+    ".gitignore",
+    "CONTRIBUTING.md"
+  ],
+  "commands": {
+    "Compile": "truffle compile",
+    "Migrate": "truffle migrate",
+    "Start Demo Dapp": "npm start"
+  }
+}
