@@ -7,8 +7,10 @@
     "LICENSE"
   ],
   "commands": {
-    "Compile": "truffle compile",
-    "Migrate": "truffle migrate",
-    "Start Demo Dapp": "npm start"
+    "1. Install Dependencies": "npm install",
+    "2. Run Local Blockchain": "ganache-cli -p 8545 -b 5",
+    "3. Compile Contracts": "truffle compile",
+    "4. Deploy the Contracts": "truffle migrate",
+    "5. Build React+Vortex Dapp": "npm start"
   }
 }
