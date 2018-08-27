@@ -3,7 +3,8 @@
     ".gitignore",
     "CONTRIBUTING.md",
     ".assets",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "commands": {
     "Compile": "truffle compile",
