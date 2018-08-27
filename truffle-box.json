@@ -1,7 +1,9 @@
 {
   "ignore": [
     ".gitignore",
-    "CONTRIBUTING.md"
+    "CONTRIBUTING.md",
+    ".assets",
+    "README.md"
   ],
   "commands": {
     "Compile": "truffle compile",
