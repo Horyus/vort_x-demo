@@ -4,7 +4,7 @@
   Author: mortimr
   -->
 <div align="center" >
-<img width="25%" src="https://raw.githubusercontent.com/Horyus/vortex-demo/master/https://raw.githubusercontent.com/Horyus/vortex-demo/master/.assets/VortexDemo.png">
+<img width="25%" src="https://github.com/Horyus/vortex-truffle-box/raw/master/box-img-lg.png">
 </div>
 
 [![](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/images/0)](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/links/0)[![](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/images/1)](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/links/1)[![](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/images/2)](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/links/2)[![](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/images/3)](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/links/3)[![](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/images/4)](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/links/4)[![](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/images/5)](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/links/5)[![](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/images/6)](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/links/6)[![](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/images/7)](https://sourcerer.io/fame/mortimr/Horyus/vortex-demo-truffle/links/7)
